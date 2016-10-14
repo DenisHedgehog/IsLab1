@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">IsLab1</string>
+    <string name="app_name">Лабораторная работа по ИС</string>
+    <string name="ok_button_text">ОК</string>
+    <string name="hint">Введите количество вершин</string>
+    <string name="hint_source">Точка начала</string>
+    <string name="hint_destination">Точка назначения</string>
 </resources>
