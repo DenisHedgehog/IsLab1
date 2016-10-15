@@ -4,68 +4,86 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hedgehog.islab1.MainActivity"
-    android:orientation="vertical">
+    >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint"
+        android:inputType="number"
+        android:id="@+id/number_of_vertices"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/create_graph_button_text"
+        android:id="@+id/create_graph_button"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_view_vertices">
+
+
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="bottom"
-        >
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:gravity="center_horizontal"
-            android:hint="@string/hint"
-            android:inputType="number"
-            />
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:id="@+id/linear_layout">
 
         <GridLayout
+            android:id="@+id/grid_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
             >
 
             <EditText
+                android:id="@+id/edit_start"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="0.5"
                 android:layout_gravity="bottom"
                 android:gravity="center_horizontal"
                 android:hint="@string/hint_source"
                 android:inputType="number"
-                android:layout_columnWeight="0.5"
-                android:id="@+id/edit_source"
                 />
 
             <EditText
+                android:id="@+id/edit_destination"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="0.5"
                 android:layout_gravity="bottom"
                 android:gravity="center_horizontal"
                 android:hint="@string/hint_destination"
-                android:inputType="number"
-                android:layout_columnWeight="0.5"
-                android:id="@+id/edit_destination"
-                />
+                android:inputType="number" />
 
         </GridLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/ok_button_text"
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:entries="@array/methods_of_search"
             />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
