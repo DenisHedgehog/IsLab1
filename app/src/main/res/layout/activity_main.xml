@@ -9,81 +9,102 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hedgehog.islab1.MainActivity"
-    >
+    tools:context="com.hedgehog.islab1.MainActivity">
 
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="center_horizontal"
-        android:hint="@string/hint"
-        android:inputType="number"
-        android:id="@+id/number_of_vertices"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/create_graph_button_text"
-        android:id="@+id/create_graph_button"
-        />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_view_vertices">
-
-
-
-    </ListView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:id="@+id/linear_layout">
-
-        <GridLayout
-            android:id="@+id/grid_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            >
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edit_start"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="0.5"
-                android:layout_gravity="bottom"
-                android:gravity="center_horizontal"
-                android:hint="@string/hint_source"
-                android:inputType="number"
-                />
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edit_destination"
-                android:layout_width="0dp"
+
+                <EditText
+                    android:id="@+id/number_of_vertices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="center_horizontal"
+                    android:hint="@string/hint"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/create_graph_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/create_graph_button_text" />
+
+
+                <ListView
+                    android:id="@+id/list_view_vertices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                </ListView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="0.5"
                 android:layout_gravity="bottom"
-                android:gravity="center_horizontal"
-                android:hint="@string/hint_destination"
-                android:inputType="number" />
+                android:orientation="vertical"
+                android:visibility="visible">
 
-        </GridLayout>
+                <GridLayout
+                    android:id="@+id/grid_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2">
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:entries="@array/methods_of_search"
-            />
+                    <EditText
+                        android:id="@+id/edit_start"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="0.5"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:hint="@string/hint_source"
+                        android:inputType="number" />
 
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/edit_destination"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="0.5"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:hint="@string/hint_destination"
+                        android:inputType="number" />
 
+                </GridLayout>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/methods_of_search" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/test_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/watch_adjacent_vertices" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

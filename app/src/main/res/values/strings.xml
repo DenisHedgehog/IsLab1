@@ -10,4 +10,8 @@
         <item>Поиск в глубину</item>
         <item>Поиск в глубину (рекурсивный)</item>
     </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="watch_adjacent_vertices">Посмотреть смежность графов</string>
 </resources>

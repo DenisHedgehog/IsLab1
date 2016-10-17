@@ -1,20 +1,15 @@
 package com.hedgehog.islab1;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -23,8 +18,8 @@ public class MainActivity extends AppCompatActivity{
     EditText startVertex;
     EditText destinationVertex;
     ListView listView;
+    MyDialogFragment myDialogFragment;
     int count;
-    private ArrayList<Vertex> vertices;
 
 
     @Override
@@ -38,8 +33,6 @@ public class MainActivity extends AppCompatActivity{
         destinationVertex = (EditText) findViewById(R.id.edit_destination);
         listView = (ListView) findViewById(R.id.list_view_vertices);
 
-
-
         graphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,32 +45,9 @@ public class MainActivity extends AppCompatActivity{
                     toast.show();
                 }
 
-                for (int i = 0; i < count; i++){
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-                /*try{
-                    count = Integer.parseInt(numberOfVertices.getText().toString());
-                }
-                catch (Exception e){
-                    Toast toast = Toast.makeText(MainActivity.this, "NaN", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-
-                CreateGraph createGraph = new CreateGraph(count);
-                vertices = createGraph.getVertices();
+                final CreateGraph createGraph = new CreateGraph(count);
                 ArrayAdapter<Vertex> adapter = new ArrayAdapter<Vertex>
-                        (MainActivity.this, android.R.layout.simple_list_item_1, vertices);
+                        (MainActivity.this, android.R.layout.simple_list_item_1, createGraph.getVertices());
 
                 try {
                     listView.setAdapter(adapter);
@@ -85,9 +55,46 @@ public class MainActivity extends AppCompatActivity{
                 catch (Exception e){
                     Toast toast = Toast.makeText(MainActivity.this, "WTF, ADAPTER?", Toast.LENGTH_SHORT);
                     toast.show();
-                }*/
+                }
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        FragmentManager manager = getSupportFragmentManager();
+                        myDialogFragment = new MyDialogFragment(createGraph, position);
+                        myDialogFragment.show(manager, "dialog");
+
+                        Button testButton = (Button) findViewById(R.id.test_button);
+
+                        testButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Graph graph = new Graph(createGraph.getVertices());
+                                String stringGraph = "";
+
+                                for (int i = 0; i < count; i++) {
+                                    stringGraph = stringGraph + " " + createGraph.getVertices().get(i).getStringAdjacentVertices()+ "\n";
+                                }
+
+                                Toast toast = Toast.makeText(MainActivity.this, stringGraph, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        });
+
+                /*String pos = "position: " + position + ", id: " + id;
+                Toast toast3 = Toast.makeText(MainActivity.this, pos, Toast.LENGTH_SHORT);
+                toast3.show();*/
+
+                    }
+                });
             }
         });
+
+
+
+
 
     }
 
