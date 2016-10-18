@@ -25,7 +25,7 @@ public class CreateGraph {
     public void addVertex(int number, Vertex vertex) {
 
         getVertices().add(number, vertex);
-        String g = Arrays.toString(getVertices().get(number).getAdjacentVertices());
+        //String g = Arrays.toString(getVertices().get(number).getAdjacentVertices());
 
     }
 

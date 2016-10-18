@@ -35,7 +35,7 @@ public class Vertex {
     public String getStringAdjacentVertices() {
         String s = "";
         for (int i = 0; i < getAdjacentVertices().length; i++) {
-            s = s + " " + getAdjacentVertices()[i];
+            s = s + " " + (getAdjacentVertices()[i] + 1);
         }
         return s;
     }

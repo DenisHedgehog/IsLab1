@@ -46,7 +46,7 @@
                 <ListView
                     android:id="@+id/list_view_vertices"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="200dp">
 
 
                 </ListView>
@@ -60,6 +60,13 @@
                 android:layout_gravity="bottom"
                 android:orientation="vertical"
                 android:visibility="visible">
+
+                <Button
+                    android:id="@+id/test_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/watch_adjacent_vertices" />
 
                 <GridLayout
                     android:id="@+id/grid_layout"
@@ -97,12 +104,13 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/test_button"
+
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/watch_adjacent_vertices" />
+                android:id="@+id/path"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
     </ScrollView>
