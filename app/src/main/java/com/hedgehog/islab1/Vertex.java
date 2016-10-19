@@ -6,10 +6,6 @@ package com.hedgehog.islab1;
 
 public class Vertex {
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -17,8 +13,6 @@ public class Vertex {
     private String name;
     private int number;
     private int[] adjacentVertices;
-
-
 
     public int getNumber() {
         return number;

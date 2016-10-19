@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     String s;
     int count;
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                         FragmentManager manager = getSupportFragmentManager();
-                        /*myDialogFragment = new MyDialogFragment(createGraph, position);
-                        myDialogFragment.show(manager, "dialog");*/
                         checkListDialogFragment = new CheckListDialogFragment(createGraph, position, count);
                         checkListDialogFragment.show(manager, "Check adjacent vertices");
-
-
                     }
                 });
-
 
 
             }
@@ -94,11 +87,14 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     String stringGraph = "Ошибка при создании графа " + e;
                     Toast toast = Toast.makeText(MainActivity.this, stringGraph, Toast.LENGTH_SHORT);
-                    //toast.show();
+                    toast.show();
                 }
                 String stringGraph = "Создан граф:\n";
                 for (int i = 0; i < count; i++) {
-                    stringGraph = stringGraph + " " + createGraph.getVertices().get(i).getStringAdjacentVertices() + "\n";
+                    try {
+                        stringGraph = stringGraph + " " + createGraph.getVertices().get(i).getStringAdjacentVertices() + "\n";
+                    } catch (Exception e) {
+                    }
                 }
                 Toast toast = Toast.makeText(MainActivity.this, stringGraph, Toast.LENGTH_SHORT);
                 toast.show();
@@ -114,17 +110,17 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     lists = new Lists(graph);
                 } catch (Exception e) {
-                    String stringGraph = "Ошибка при создании списков " + e;
+                    /*String stringGraph = "Ошибка при создании списков " + e;
                     Toast toast = Toast.makeText(MainActivity.this, stringGraph, Toast.LENGTH_SHORT);
-                    //toast.show();
+                    //toast.show();*/
                 }
                 try {
                     searches = new Searches(new Lists(graph), createGraph.getVertices().get(Integer.parseInt(startVertex.getText().toString()) - 1),
                             createGraph.getVertices().get(Integer.parseInt(destinationVertex.getText().toString()) - 1));
                 } catch (Exception e) {
-                    String stringGraph = "Ошибка при создании объекта поиска " + e;
+                    /*String stringGraph = "Ошибка при создании объекта поиска " + e;
                     Toast toast = Toast.makeText(MainActivity.this, stringGraph, Toast.LENGTH_SHORT);
-                    //toast.show();
+                    //toast.show();*/
                 }
                 textView = (TextView) findViewById(R.id.path);
                 switch (position) {
@@ -133,16 +129,15 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             searches.breadthSearch(graph.getVertices(), lists.getOpen(), lists.getClosed());
                         } catch (Exception e) {
-                            String ex = "Ошибка в поиске " + e;
+                            /*String ex = "Ошибка в поиске " + e;
                             Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                            //toast.show();
+                            //toast.show();*/
                         }
 
                         try {
                             s = "Путь от вершины " + startVertex.getText().toString() + " до вершины " + destinationVertex.getText().toString()
                                     + " был пройден за " + searches.getBreadthCount() + " шага(шагов) при поиске в ширину.";
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
 
                         }
                         textView.setText(s);
@@ -153,15 +148,14 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             searches.depthSearch(graph.getVertices(), lists.getOpen(), lists.getClosed());
                         } catch (Exception e) {
-                            String ex = "Ошибка в поиске " + e;
+                            /*String ex = "Ошибка в поиске " + e;
                             Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                            //toast.show();
+                            //toast.show();*/
                         }
                         try {
                             s = "Путь от вершины " + startVertex.getText().toString() + " до вершины " + destinationVertex.getText().toString()
                                     + " был пройден за " + searches.getDepthCount() + " шага(шагов) при поиске в глубину.";
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
 
                         }
                         textView.setText(s);
@@ -172,15 +166,14 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             searches.depthRecSearch(searches.getStartVertex(), graph.getVertices(), lists.getClosed());
                         } catch (Exception e) {
-                            String ex = "Ошибка в поиске " + e;
+                            /*String ex = "Ошибка в поиске " + e;
                             Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                            //toast.show();
+                            //toast.show();*/
                         }
                         try {
                             s = "Путь от вершины " + startVertex.getText().toString() + " до вершины " + destinationVertex.getText().toString()
                                     + " был пройден за " + searches.getRecCount() + " шага(шагов) при рекурсивном поиске в глубину.";
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
 
                         }
                         textView.setText(s);
@@ -196,96 +189,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        /*Lists lists = new Lists(graph);
-        Searches searches = new Searches(new Lists(graph), createGraph.getVertices().get(Integer.parseInt(startVertex.getText().toString()) - 1),
-                createGraph.getVertices().get(Integer.parseInt(destinationVertex.getText().toString()) - 1));
-
-        String s = "Путь от вершины " + startVertex.getText().toString() + " до вершины " + destinationVertex.getText().toString()
-                + " был пройден за ";
-        textView = (TextView) findViewById(R.id.path);
-        switch (position) {
-
-            case 0:
-                try {
-                    searches.breadthSearch(graph.getVertices(), lists.getOpen(), lists.getClosed());
-                }
-                catch (Exception e) {
-                    String ex = "Ошибка в поиске " + e;
-                    Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-
-                s += searches.getBreadthCount() + " шага(шагов) при поиске в ширину.";
-                textView.setText(s);
-                break;
-
-            case 1:
-                try {
-                    searches.depthSearch(graph.getVertices(), lists.getOpen(), lists.getClosed());
-                }
-                catch (Exception e) {
-                    String ex = "Ошибка в поиске " + e;
-                    Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                s += searches.getBreadthCount() + " шага(шагов) при поиске в глубину.";
-                textView.setText(s);
-                break;
-
-            case 2:
-                try {
-                    searches.depthRecSearch(searches.getStartVertex(), graph.getVertices(), lists.getClosed());
-                }
-                catch (Exception e) {
-                    String ex = "Ошибка в поиске " + e;
-                    Toast toast = Toast.makeText(MainActivity.this, ex, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                s += searches.getBreadthCount() + " шага(шагов) при рекурсивном поиске в глубину.";
-                textView.setText(s);
-                break;
-
-        }*/
-
-        /*Button breadthSearchButton = (Button) findViewById(R.id.breadth_search_button);
-
-        breadthSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Lists lists = new Lists(graph);
-                Searches searches = new Searches(new Lists(graph), createGraph.getVertices().get(Integer.parseInt(startVertex.getText().toString()) - 1),
-                        createGraph.getVertices().get(Integer.parseInt(destinationVertex.getText().toString()) - 1));
-                //searches.depthRecSearch(searches.getStartVertex(), graph.getVertices(), lists.getClosed());
-
-
-                try {
-                    String s1 = "Поиск начался";
-                    Toast toast1 = Toast.makeText(MainActivity.this, s1, Toast.LENGTH_LONG);
-                    toast1.show();
-                    searches.breadthSearch(graph.getVertices(), lists.getOpen(), lists.getClosed());
-                    String s = "Поиск закончился";
-                    Toast toast = Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                catch (Exception e) {
-                    String s = "Ошибка в поиске " + e;
-                    Toast toast = Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-
-                String s = "Путь от вершины " + startVertex.getText().toString() + " до вершины " + destinationVertex.getText().toString()
-                        + " был пройден за " + searches.getBreadthCount() + " шага(шагов).";
-                TextView textView = (TextView) findViewById(R.id.path);
-                textView.setText(s);
-                *//*Toast toast = Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG);
-                toast.show();*//*
-
-            }
-        });*/
-
-
     }
+
 
 }

@@ -4,10 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
@@ -21,32 +18,10 @@ public class CheckListDialogFragment extends android.support.v4.app.DialogFragme
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public CreateGraph getCreateGraph() {
-        return createGraph;
-    }
-
-    public void setCreateGraph(CreateGraph createGraph) {
-        this.createGraph = createGraph;
-    }
-
-    public int[] getAdjacentVertices() {
-        return adjacentVertices;
-    }
-
-    public void setAdjacentVertices(int[] adjacentVertices) {
-        this.adjacentVertices = adjacentVertices;
-    }
-
     private int position;
     private CreateGraph createGraph;
-    private int[] adjacentVertices;
     private int count;
 
-    public int getCount(){ return count; }
 
     public CheckListDialogFragment(CreateGraph createGraph, int position, int count) {
         this.position = position;
