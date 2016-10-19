@@ -14,18 +14,26 @@ public class Searches {
     private Vertex destinationVertex;
     private ArrayList<Parent> parents = new ArrayList<Parent>();
     private int recCount = 0;
-    private int count = 0;
+    private int breadthCount = 0;
+    private int depthCount = 0;
 
-    public int getCount() {
-        return count;
+
+    public int getDepthCount() {
+        return depthCount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setDepthCount(int depthCount) {
+        this.depthCount = depthCount;
     }
 
 
+    public int getBreadthCount() {
+        return breadthCount;
+    }
 
+    public void setBreadthCount(int breadthCount) {
+        this.breadthCount = breadthCount;
+    }
 
 
     public int getRecCount() {
@@ -75,7 +83,7 @@ public class Searches {
             count++;
             // System.out.println("Номер первой вершины " + tempTop.getNumOfTop());
             if (destinationVertex.equals(tempTop)){
-                setCount(count);
+                setBreadthCount(count);
                 return true;
             }
             else {
@@ -112,30 +120,30 @@ public class Searches {
         open.add(vertices.get(getStartVertex().getNumber()));
         int count = 0;
         while (!open.isEmpty()){
-            Vertex tempTop = open.get(getStartVertex().getNumber());
+            Vertex vertex = open.get(getStartVertex().getNumber());
             count++;
-            // System.out.println("Номер первой вершины " + tempTop.getNumOfTop());
-            if (destinationVertex.equals(tempTop)){
-                setCount(count);
+            //System.out.println("Номер первой вершины " + vertex.getNumOfTop());
+            if (destinationVertex.equals(vertex)){
+                setDepthCount(count);
                 return true;
             }
             else {
                 lists.deleteFirst(open);
-                lists.addFirst(closed, tempTop);
-                // System.out.println("Номер вершины, добавленной в closed " + closed.get(0).getNumOfTop());
-                int [] tempRelatedTops = tempTop.getAdjacentVertices();
-                //  System.out.println("Количество смежных выбранной вершин " + tempRelatedTops.length);
-                for (int j = 0; j<tempRelatedTops.length; j++){
-                    // System.out.println("Обрабатываемая смежная вершина " + tempRelatedTops[j]);
-                    if (!lists.isContains(open,tempRelatedTops[j]) & (!lists.isContains(closed, tempRelatedTops[j]))){
-                        for (int k = 0; k<vertices.size(); k++){
-                            Vertex someTop = vertices.get(k);
-                            //System.out.println("Номер вершины, которая будет сравниваться с номером смежной: "+ someTop.getNumOfTop());
-                            if (someTop.getNumber() == tempRelatedTops[j]){
-                                //System.out.println("Номер вершины, совпавшей со смежной "+someTop.getNumOfTop());
-                                Parent parent = new Parent(someTop.getNumber(),tempTop.getNumber());
+                lists.addFirst(closed, vertex);
+                //System.out.println("Номер вершины, добавленной в closed " + closed.get(0).getNumOfTop());
+                int [] adjacentVertices = vertex.getAdjacentVertices();
+                // System.out.println("Количество смежных выбранной вершин " + adjacentVertices.length);
+                for (int j = 0; j < adjacentVertices.length; j++){
+                    // System.out.println("Обрабатываемая смежная вершина " + adjacentVertices[j]);
+                    if (!lists.isContains(open,adjacentVertices[j]) & (!lists.isContains(closed, adjacentVertices[j]))){
+                        for (int k = 0; k < vertices.size(); k++){
+                            Vertex someVertex = vertices.get(k);
+                            // System.out.println("Номер вершины, которая будет сравниваться с номером смежной: "+ someVertex.getNumOfTop());
+                            if (someVertex.getNumber() == adjacentVertices[j]){
+                                // System.out.println("Номер вершины, совпавшей со смежной "+someVertex.getNumOfTop());
+                                Parent parent = new Parent(someVertex.getNumber(),vertex.getNumber());
                                 parents.add(parent);
-                                lists.addFirst(open, someTop);
+                                lists.addFirst(open,someVertex);
                                 break;
                             }
                         }
@@ -145,6 +153,25 @@ public class Searches {
         }
         return false;
     }
+
+    /*int [] adjacentVertices = vertex.getAdjacentVertices();
+    // System.out.println("Количество смежных выбранной вершин " + adjacentVertices.length);
+    for (int j = 0; j<adjacentVertices.length; j++){
+        // System.out.println("Обрабатываемая смежная вершина " + adjacentVertices[j]);
+        if (!lists.isContains(open,adjacentVertices[j]) & (!lists.isContains(closed, adjacentVertices[j]))){
+            for (int k = 0; k<vertices.size(); k++){
+                Vertex someVertex = vertices.get(k);
+                // System.out.println("Номер вершины, которая будет сравниваться с номером смежной: "+ someVertex.getNumOfTop());
+                if (someVertex.getNumber() == adjacentVertices[j]){
+                    // System.out.println("Номер вершины, совпавшей со смежной "+someVertex.getNumOfTop());
+                    Parent parent = new Parent(someVertex.getNumber(),vertex.getNumber());
+                    parents.add(parent);
+                    lists.addFirst(open,someVertex);
+                    break;
+                }
+            }
+        }
+    }*/
 
     public boolean depthRecSearch(Vertex tempTop, ArrayList<Vertex> ourTops, ArrayList<Vertex> closed){
         //System.out.println("closed size = " + closed.size());
