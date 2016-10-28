@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     listView.setAdapter(adapter);
+                    Utils utils = new Utils();
+                    utils.setListViewHeightBasedOnChildren(listView);
                 } catch (Exception e) {
                     Toast toast = Toast.makeText(MainActivity.this, "WTF, ADAPTER?", Toast.LENGTH_SHORT);
                     toast.show();

@@ -11,11 +11,9 @@ public class Searches {
     private Lists lists;
     private Vertex startVertex;
     private Vertex destinationVertex;
-    private ArrayList<Parent> parents = new ArrayList<Parent>();
     private int recCount = 0;
     private int breadthCount = 0;
     private int depthCount = 0;
-
 
     public int getDepthCount() {
         return depthCount;
@@ -52,7 +50,6 @@ public class Searches {
     public boolean breadthSearch(ArrayList<Vertex> vertices, ArrayList<Vertex> open, ArrayList<Vertex> closed){
         open.clear();
         closed.clear();
-        parents.clear();
         open.add(vertices.get(getStartVertex().getNumber()));
         int count = 0;
         while (!open.isEmpty()){
@@ -71,8 +68,6 @@ public class Searches {
                         for (int k = 0; k<vertices.size(); k++){
                             Vertex someTop = vertices.get(k);
                             if (someTop.getNumber() == tempRelatedTops[j]){
-                                Parent parent = new Parent(someTop.getNumber(),tempTop.getNumber());
-                                parents.add(parent);
                                 lists.addLast(open, someTop);
                                 break;
                             }
@@ -87,7 +82,6 @@ public class Searches {
     public boolean depthSearch(ArrayList<Vertex> vertices, ArrayList<Vertex> open, ArrayList<Vertex> closed){
         open.clear();
         closed.clear();
-        parents.clear();
         open.add(vertices.get(getStartVertex().getNumber()));
         int count = 0;
         while (!open.isEmpty()){
@@ -106,8 +100,6 @@ public class Searches {
                         for (int k = vertices.size() - 1; k >= 0 ; k--){
                             Vertex someVertex = vertices.get(k);
                             if (someVertex.getNumber() == adjacentVertices[j]){
-                                Parent parent = new Parent(someVertex.getNumber(),vertex.getNumber());
-                                parents.add(parent);
                                 lists.addFirst(open,someVertex);
                                 break;
                             }
